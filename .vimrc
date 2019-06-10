@@ -2,7 +2,10 @@ call plug#begin('~/.vim/plugged')
 " 下面的我安装的插件
 
 " complete
-Plug 'Valloric/YouCompleteMe', {'on': [], 'do': './install.py --clang-complete --go-complete --system-libclang --java-complete'}
+" Plug 'Valloric/YouCompleteMe', {'on': [], 'do': './install.py --clang-complete --go-complete --system-libclang --java-complete'}
+
+Plug '~/.vim/plugged/YouCompleteMe'
+Plug 'rdnetto/YCM-Generator', {'branch':'stable'}
 
 " unit
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
@@ -24,6 +27,8 @@ Plug 'junegunn/vim-easy-align', {'on': '<Plug>(EasyAlign)'}
 Plug 'tpope/vim-sensible'
 Plug 'rhysd/clever-f.vim'
 Plug 'honza/vim-snippets'
+Plug 'vim-scripts/stlrefvim'
+Plug 'Mizuchi/STL-Syntax'
 
 " find & search & move
 Plug 'Yggdroot/LeaderF', {'on': ['LeaderfFile', 'LeaderfFunction']}
@@ -302,6 +307,9 @@ nmap <F8> :TagbarToggle<CR>
 "    "parser": "babel-eslint"
 " }
 
+" syntastic设置
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:ale_linters = {
             \ 'python': ['flake8', 'mypy'],
             \ 'reStructuredText': ['rstcheck'],
@@ -431,3 +439,9 @@ let g:Lf_WildIgnore = {
             \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[cod]']
             \}
 
+
+
+set cursorcolumn
+set cursorline
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkgreen guifg=white
+hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkgreen guifg=white
