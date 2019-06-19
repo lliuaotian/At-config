@@ -445,3 +445,13 @@ set cursorcolumn
 set cursorline
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkgreen guifg=white
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkgreen guifg=white
+
+
+" 打开文件自动跳转到上一次的光标位置
+if has("autocmd")
+    au BufReadPost * if line("`\"") > 1 && line("`\"") <= line("$") | exe "normal! g`\"" | endif
+    " for simplicity, "  au BufReadPost * exe "normal! g`\"", is Okay.
+endif
+
+" 光标限制，不会到最上边或最下边7行
+set scrolloff=24
