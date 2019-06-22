@@ -1,7 +1,6 @@
 call plug#begin('~/.vim/plugged')
 " 下面的我安装的插件
 
-" complete
 " Plug 'Valloric/YouCompleteMe', {'on': [], 'do': './install.py --clang-complete --go-complete --system-libclang --java-complete'}
 
 Plug '~/.vim/plugged/YouCompleteMe'
@@ -47,15 +46,20 @@ Plug 'mattn/emmet-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'groenewege/vim-less'
 Plug 'Raimondi/delimitMate'
+Plug 'sophacles/vim-processing'
 " Plug 'godlygeek/tabular', {'for': 'markdown', 'on': []}
 " Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 
-" python-syntax
-let g:python_highlight_all = 1
-
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'ervandew/supertab'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 "插件末尾
+" python-syntax
+let g:python_highlight_all = 1
 
 " lazy load plugins
 autocmd! InsertEnter * call Init()
@@ -83,29 +87,34 @@ set autoindent             " 自动缩进
 set cindent                " C语言的缩进格式
 set smartindent            " 当遇到右花括号（}），则取消缩进形式
 set shiftround
-set tabstop=4              " 定义tab所等同的空格长度
-set expandtab              " expandtab，输入一个tab，将被展开成softtabstop值个空格，如果softtabstop=4，那么一个tab就会被替换成4个空格
-set shiftwidth=4           " 程序中自动缩进所使用的空白长度指示的
 set ruler                  " 底部的行号等显示
 set novisualbell           " 去掉输入错误的提示声音
-set softtabstop=4          " 逢4空格进1制表符
+" 关于tab和space的一些setting
+set softtabstop=2          " 逢2空格进1制表符
+set expandtab              " expandtab，输入一个tab，将被展开成softtabstop值个空格，如果softtabstop=4，那么一个tab就会被替换成4个空格
+set tabstop=2              " 定义tab所等同的空格长度
+set shiftwidth=2           " 程序中自动缩进所使用的空白长度指示的
+" END
 set t_md=                  " 禁用粗体
 set t_Co=256               " 开启256色
-set fileformat=unix        " filetype
+" file type setting
+set fileformat=unix        " filetype 文件格式主要区别在于Windows和Unix的换行符不同
 set encoding=utf-8         " 编码utf-8
-set cmdheight=1
+" END
+set cmdheight=1            " vim命令模式下的命令行高度，最下方命令行
 set noswapfile             " 禁止生产交换文件
-set norelativenumber       " 行号为不是相对模式
+set relativenumber         " 相对模式的行号
+" set norelativenumber       " 行号为不是相对模式
 set ignorecase             " 忽略大小写
 set shortmess=I            " 不显示vim版本信息
-set noshowmode             " 不显示--INSERT--
+set noshowmode             " 在底部命令行不显示当前模式
 set nrformats=             " 使vim将所有数字当成十进制
 set timeoutlen=400        " 设置leader键延迟为400ms
 set splitbelow
 set splitright
 set showcmd
 set hidden
-set laststatus=2
+set laststatus=2           " 设置状态航
 set hlsearch
 " set clipboard+=unnamedplus
 " sudo pacman -S xclip 支持全局剪切板
@@ -132,9 +141,9 @@ hi Search cterm=underline ctermfg=red ctermbg=NONE guifg=red guibg=NONE gui=unde
 " vim key mapping
 let mapleader=","
 map <leader>n :NERDTreeToggle<cr>
-map <leader><leader>t :LeaderfFunction!<cr>
-map  <leader><leader>w <Plug>(easymotion-bd-w)
-map  <leader><leader>s <Plug>(easymotion-bd-jk)
+map <leader><leader>t :LeaderfFunction!<cr> "查找函数
+map  <leader><leader>w <Plug>(easymotion-bd-w) " 跳转到任意单词前
+map  <leader><leader>s <Plug>(easymotion-bd-jk) " 跳转到任意行首
 map <F1> <nop>
 map j gj
 map k gk
@@ -235,7 +244,9 @@ if has("autocmd")
 endif
 
 autocmd FileType python set colorcolumn=80
-" set cursorline
+
+" 判断文件类型
+set cursorline
 " autocmd InsertEnter * set nocursorline
 " autocmd InsertLeave * set cursorline
 autocmd FileType json,html,jsx,javascript.jsx,vue,markdown setlocal ts=2 sts=2 sw=2 expandtab
@@ -357,7 +368,12 @@ nnoremap <leader>l :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
 " nnoremap <leader>lo :lopen<CR>    "open locationlist
 " nnoremap <leader>lc :lclose<CR>   "close locationlist
-inoremap <leader><leader> <C-x><C-o>
+" inoremap <leader><leader> <C-x><C-o>  "不知道什么作用先注释掉
+" 在插入模式下按两下leader退出插入模式
+inoremap <leader><leader> <Esc>
+" 在正常模式下按两下leader进入插入模式
+noremap <leader><leader> a
+inoremap <leader>x <Esc>xa
 let g:ycm_cache_omnifunc=0
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
@@ -455,3 +471,14 @@ endif
 
 " 光标限制，不会到最上边或最下边7行
 set scrolloff=24
+
+" 解决tab冲突
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
