@@ -370,7 +370,8 @@ nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntast
 " nnoremap <leader>lc :lclose<CR>   "close locationlist
 " inoremap <leader><leader> <C-x><C-o>  "不知道什么作用先注释掉
 " 在插入模式下按两下leader退出插入模式
-inoremap <leader><leader> <Esc>
+" 退出INSERT模式后自动保存文件
+inoremap <leader><leader> <Esc>:w<CR>
 " 在正常模式下按两下leader进入插入模式
 noremap <leader><leader> a
 inoremap <leader>x <Esc>xa
