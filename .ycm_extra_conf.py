@@ -33,6 +33,8 @@ flags = [
     '-I', '/usr/include',
     '-I', '.'
     '-I', '/usr/include/c++/7/',
+    '-I', '/usr/include/x86_64-linux-gnu/sys/',
+    '-I', '/usr/include/x86_64-linux-gnu/bits/',
 ]
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
