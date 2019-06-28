@@ -8,6 +8,7 @@ Plug 'rdnetto/YCM-Generator', {'branch':'stable'}
 
 " unit
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'ryanoasis/vim-devicons',
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
@@ -19,7 +20,7 @@ Plug 'sgur/vim-lazygutter'
 Plug 'SirVer/ultisnips'
 Plug 'fisadev/vim-isort', {'on': 'Isort'}
 Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/nerdcommenter', {'on': '<plug>NERDCommenterToggle'}
+Plug 'scrooloose/nerdcommenter', {'on': '<plug>ERDCommenterToggle'}
 Plug 'tpope/vim-surround'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/vim-easy-align', {'on': '<Plug>(EasyAlign)'}
@@ -201,13 +202,16 @@ inoremap <leader>b ()<Esc>i
 inoremap <leader>s []<Esc>i
 inoremap <leader>t {}<Esc>i
 inoremap <leader>m *
-inoremap <leader>d <SPACE>-><SPACE>
+inoremap <leader>d ->
 inoremap <leader>f <Esc>bi"<Esc>ea"
+inoremap <leader>j <Esc>ji
+inoremap <leader>k <Esc>ki
+inoremap jj <Esc>j
+inoremap kk <Esc>k
 inoremap <c-l> <right>
 
 
 " 输入快捷方式
-iabbrev hw Hello World
 iabbrev im import
 cabbrev tn tabnew
 cabbrev install PlugInstall
@@ -405,7 +409,7 @@ let NERDTreeShowHidden=1 " 是否显示隐藏文件
 let NERDTreeWinSize=30 " 设置宽度
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-" 按下 F1 调出/隐藏 NERDTree
+" 按下 F2 调出/隐藏 NERDTree
 map <F2> :NERDTreeToggle<CR>
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
 let g:NERDTreeIgnore = ['\.pyc$', '^__pycache__$', '\.git$', '^migrations$', 'node_modules', '^.pytest_cache$', '^.mypy_cache$']
