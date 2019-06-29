@@ -209,8 +209,8 @@ inoremap <leader>k <Esc>ki
 inoremap jj <Esc>j
 inoremap kk <Esc>k
 inoremap dd <Esc>ddi
-inoremap <leader>O <Esc>Oi
-inoremap <leader>o <Esc>oi
+inoremap <leader>O <Esc>O
+inoremap <leader>o <Esc>o
 inoremap <c-l> <right>
 
 
