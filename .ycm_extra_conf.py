@@ -29,12 +29,11 @@ flags = [
 #    '-isystem', '/System/Library/Frameworks/Python.framework/Headers',
 #    '-isystem', '/usr/local/include',
 #    '-isystem', '/usr/local/include/eigen3',
-
+    '-I', '/usr/include/x86_64-linux-gnu/',
+    '-I', '/usr/include/x86_64-linux-gnu/',
     '-I', '/usr/include',
-    '-I', '.'
+    '-I', '.',
     '-I', '/usr/include/c++/7/',
-    '-I', '/usr/include/x86_64-linux-gnu/sys/',
-    '-I', '/usr/include/x86_64-linux-gnu/bits/',
 ]
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
