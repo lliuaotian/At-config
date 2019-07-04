@@ -110,19 +110,18 @@ set ignorecase             " 忽略大小写
 set shortmess=I            " 不显示vim版本信息
 set noshowmode             " 在底部命令行不显示当前模式
 set nrformats=             " 使vim将所有数字当成十进制
-set timeoutlen=400        " 设置leader键延迟为400ms
+set timeoutlen=300        " 设置leader键延迟为400ms
 set splitbelow
 set splitright
 set showcmd
 set hidden
 set laststatus=2           " 设置状态航
 set hlsearch
-" set clipboard+=unnamedplus
-" sudo pacman -S xclip 支持全局剪切板
-" set tags=./tags;/
+" ctags setting
+set tags=./tags;/
 
 
-" vim color setting
+" vim colorscheme and color setting
 colorscheme space-vim-dark
 hi CursorLineNR cterm=bold gui=bold
 hi lineNr guibg=NONE ctermbg=NONE
@@ -135,7 +134,7 @@ hi TabLineFill ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 hi TabLine ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 hi TabLineSel ctermfg=red ctermbg=NONE guifg=#d75faf guibg=NONE
 hi Search cterm=underline ctermfg=red ctermbg=NONE guifg=red guibg=NONE gui=underline
-" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 
 
 
@@ -409,7 +408,7 @@ let g:ycm_semantic_triggers =  {
 let NERDTreeShowLineNumbers=1
 let NERDTreeAutoCenter=1
 let NERDTreeShowHidden=1 " 是否显示隐藏文件
-let NERDTreeWinSize=30 " 设置宽度
+let NERDTreeWinSize=20 " 设置宽度
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 " 按下 F2 调出/隐藏 NERDTree
@@ -424,28 +423,6 @@ let g:NERDTreeIgnore = ['\.pyc$', '^__pycache__$', '\.git$', '^migrations$', 'no
 let g:lightline = {
       \ 'colorscheme': 'one',
       \ }
-
-" vim-go
-" let g:go_template_autocreate = 0
-" let g:go_fmt_command = "goimports"
-" let g:go_fmt_fail_silently = 1
-" let g:go_fmt_command = "gofmt"
-" let g:go_fmt_autosave = 0
-" let g:go_version_warning = 0
-" let g:go_list_type = "quickfix"
-" let g:go_fmt_fail_silently = 0
-" let g:go_highlight_types = 1
-" let g:go_highlight_fields = 1
-" let g:go_highlight_functions = 1
-" let g:go_highlight_function_calls = 1
-" let g:go_highlight_extra_types = 1
-" let g:go_highlight_generate_tags = 1
-" let g:go_highlight_build_constraints = 1
-" let g:go_highlight_methods = 1
-" let g:go_highlight_operators = 1
-" let g:go_highlight_structs = 1
-" let g:go_term_height = 10
-
 
 " autocmd FileType go nnoremap <leader>b  <Plug>(go-build)
 " autocmd FileType go nmap <leader>r  <Plug>(go-run-split)
@@ -463,8 +440,6 @@ let g:Lf_WildIgnore = {
             \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[cod]']
             \}
 
-
-
 set cursorcolumn
 set cursorline
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkgreen guifg=white
@@ -477,7 +452,7 @@ if has("autocmd")
     " for simplicity, "  au BufReadPost * exe "normal! g`\"", is Okay.
 endif
 
-" 光标限制，不会到最上边或最下边7行
+" 光标限制，尽量让你的工作区放置在屏幕当中
 set scrolloff=24
 
 " 解决tab冲突
