@@ -30,7 +30,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -162,3 +162,11 @@ bar {
 
 }
 
+new_window 1pixel
+
+exec_always --no-startup-id python3 /home/liuaotian/shadowsocksr/shadowsocks/local.py -c /etc/shadowsocks.json
+exec_always --no-startup-id fcitx
+exec_always --no-startup-id variety
+exec_always --no-startup-id compton
+
+gaps inner 15
