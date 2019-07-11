@@ -5,8 +5,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug '~/.vim/plugged/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', {'branch':'stable'}
-
-" unit
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'ryanoasis/vim-devicons',
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
@@ -48,8 +46,6 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'groenewege/vim-less'
 Plug 'Raimondi/delimitMate'
 Plug 'sophacles/vim-processing'
-" Plug 'godlygeek/tabular', {'for': 'markdown', 'on': []}
-" Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -122,7 +118,7 @@ set tags=./tags;/
 
 
 " vim colorscheme and color setting
-colorscheme space-vim-dark
+colorscheme despaceio
 hi CursorLineNR cterm=bold gui=bold
 hi lineNr guibg=NONE ctermbg=NONE
 hi Normal guibg=NONE ctermbg=NONE
@@ -357,6 +353,10 @@ highlight ALEInfoLine ctermbg=NONE ctermfg=black guibg=NONE guifg=#e18254
 " YouCompleteMe
 let g:ycm_server_python_interpreter = '/usr/bin/python3'
 let g:ycm_python_binary_path = 'python3'
+" 输入两个字符后开始补全
+let g:ycm_min_num_identifier_candidate_chars = 2
+" <CTRL> z 进行函数补全
+let g:ycm_key_invoke_completion = '<c-z>'
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_add_preview_to_completeopt = 0
@@ -455,7 +455,6 @@ endif
 set scrolloff=24
 
 " 解决tab冲突
-" make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
