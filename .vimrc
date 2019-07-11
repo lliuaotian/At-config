@@ -356,7 +356,6 @@ let g:ycm_python_binary_path = 'python3'
 " 输入两个字符后开始补全
 let g:ycm_min_num_identifier_candidate_chars = 2
 " <CTRL> z 进行函数补全
-let g:ycm_key_invoke_completion = '<c-z>'
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_add_preview_to_completeopt = 0
@@ -365,7 +364,8 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_max_num_candidates = 14
 let g:ycm_max_num_identifier_candidates = 7
 " set completefunc=youcompleteme#Complete
-set completeopt=longest,menu   " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+" set completeopt=longest,menu   " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+set completeopt=menu,menuone   " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
 let g:ycm_global_ycm_extra_conf = "~/.ycm_extra_conf.py"
 nnoremap <leader>j :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>k :YcmCompleter GoToDefinition<CR>
