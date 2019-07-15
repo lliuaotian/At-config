@@ -4,7 +4,6 @@ call plug#begin('~/.vim/plugged')
 " Plug 'Valloric/YouCompleteMe', {'on': [], 'do': './install.py --clang-complete --go-complete --system-libclang --java-complete'}
 
 Plug '~/.vim/plugged/YouCompleteMe'
-Plug 'numirias/semshi', {'do':':UpdateRemotePlugins'}
 Plug 'rdnetto/YCM-Generator', {'branch':'stable'}
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'ryanoasis/vim-devicons',
