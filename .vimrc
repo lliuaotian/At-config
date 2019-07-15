@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'Valloric/YouCompleteMe', {'on': [], 'do': './install.py --clang-complete --go-complete --system-libclang --java-complete'}
 
 Plug '~/.vim/plugged/YouCompleteMe'
+Plug 'numirias/semshi', {'do':':UpdateRemotePlugins'}
 Plug 'rdnetto/YCM-Generator', {'branch':'stable'}
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'ryanoasis/vim-devicons',
@@ -91,13 +92,11 @@ set softtabstop=2          " 逢2空格进1制表符
 set expandtab              " expandtab，输入一个tab，将被展开成softtabstop值个空格，如果softtabstop=4，那么一个tab就会被替换成4个空格
 set tabstop=2              " 定义tab所等同的空格长度
 set shiftwidth=2           " 程序中自动缩进所使用的空白长度指示的
-" END
 set t_md=                  " 禁用粗体
 set t_Co=256               " 开启256色
 " file type setting
 set fileformat=unix        " filetype 文件格式主要区别在于Windows和Unix的换行符不同
 set encoding=utf-8         " 编码utf-8
-" END
 set cmdheight=1            " vim命令模式下的命令行高度，最下方命令行
 set noswapfile             " 禁止生产交换文件
 set relativenumber         " 相对模式的行号
@@ -106,7 +105,7 @@ set ignorecase             " 忽略大小写
 set shortmess=I            " 不显示vim版本信息
 set noshowmode             " 在底部命令行不显示当前模式
 set nrformats=             " 使vim将所有数字当成十进制
-set timeoutlen=300        " 设置leader键延迟为400ms
+set timeoutlen=300        " 设置leader键延迟为300ms
 set splitbelow
 set splitright
 set showcmd
@@ -141,8 +140,8 @@ map <leader><leader>t :LeaderfFunction!<cr> "查找函数
 map  <leader><leader>w <Plug>(easymotion-bd-w) " 跳转到任意单词前
 map  <leader><leader>s <Plug>(easymotion-bd-jk) " 跳转到任意行首
 map <F1> <nop>
-map j gj
-map k gk
+" map j gj
+" map k gk
 vnoremap <leader>y "+y
 vnoremap <leader>p "+p
 " nnoremap <F5> :vsplit $MYVIMRC<cr>
@@ -321,7 +320,7 @@ nmap <F8> :TagbarToggle<CR>
 
 " syntastic设置
 let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+let g:syntastic_cpp_compiler_options = ' -std=c++14 -stdlib=libc++'
 let g:ale_linters = {
             \ 'python': ['flake8', 'mypy'],
             \ 'reStructuredText': ['rstcheck'],
