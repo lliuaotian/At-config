@@ -115,7 +115,7 @@ set hlsearch
 set tags=./tags;/
 
 
-" vim colorscheme and color setting
+" vimsymotion-bd-jk) " 跳转到任意行首" colorscheme and color setting
 colorscheme despaceio
 hi CursorLineNR cterm=bold gui=bold
 hi lineNr guibg=NONE ctermbg=NONE
@@ -130,14 +130,9 @@ hi TabLineSel ctermfg=red ctermbg=NONE guifg=#d75faf guibg=NONE
 hi Search cterm=underline ctermfg=red ctermbg=NONE guifg=red guibg=NONE gui=underline
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 
-
-
-" vim key mapping
 let mapleader=","
 map <leader>n :NERDTreeToggle<cr>
 map <leader><leader>t :LeaderfFunction!<cr> "查找函数
-map  <leader><leader>w <Plug>(easymotion-bd-w) " 跳转到任意单词前
-map  <leader><leader>s <Plug>(easymotion-bd-jk) " 跳转到任意行首
 map <F1> <nop>
 " map j gj
 " map k gk
@@ -161,11 +156,14 @@ noremap <leader>w :w<cr>
 noremap <leader>q :q!<cr>
 noremap <leader>e :wq<cr>
 autocmd FileType python noremap <leader>c A:<cr>
+" 消除颜色 比如搜索上的颜色 消除掉这个颜色
 noremap <leader><space> :nohlsearch<cr>
+" 加载文件
 noremap <leader>f :LeaderfFile<cr>
 autocmd FileType python noremap <leader><leader>d :Pydocstring<cr>
 noremap H ^
 noremap L $
+" 跳转到不同的窗口
 noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
@@ -369,11 +367,7 @@ nnoremap <leader>j :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>k :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>l :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
-" nnoremap <leader>lo :lopen<CR>    "open locationlist
-" nnoremap <leader>lc :lclose<CR>   "close locationlist
-" inoremap <leader><leader> <C-x><C-o>  "不知道什么作用先注释掉
 " 在插入模式下按两下leader退出插入模式
-" 退出INSERT模式后自动保存文件
 inoremap <leader><leader> <Esc>:w<CR>
 " 在正常模式下按两下leader进入插入模式
 noremap <leader><leader> a
@@ -421,14 +415,6 @@ let g:lightline = {
       \ 'colorscheme': 'one',
       \ }
 
-" autocmd FileType go nnoremap <leader>b  <Plug>(go-build)
-" autocmd FileType go nmap <leader>r  <Plug>(go-run-split)
-" autocmd FileType go nnoremap <leader>r  :exec '!go run' shellescape(@%, 1)<cr>
-" autocmd FileType go nnoremap <Leader>v <Plug>(go-def-split)
-" autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-
-
-" LeaderF
 let g:Lf_ReverseOrder = 1
 let g:Lf_WindowHeight = 0.30
 let g:Lf_CursorBlink = 0
