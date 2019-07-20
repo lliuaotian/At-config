@@ -3,14 +3,17 @@ call plug#begin('~/.vim/plugged')
 
 " Plug 'Valloric/YouCompleteMe', {'on': [], 'do': './install.py --clang-complete --go-complete --system-libclang --java-complete'}
 
-Plug '~/.vim/plugged/YouCompleteMe'
+" Plug '~/.vim/plugged/YouCompleteMe'
+Plug '/usr/share/vim/vimfiles/autoload/youcompleteme.vim', {'on': []}
 Plug 'rdnetto/YCM-Generator', {'branch':'stable'}
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'ryanoasis/vim-devicons',
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
+" Tab缩进线
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
-Plug 'w0rp/ale'
+" 语法检查
+Plug 'w0rp/ale', {'for': ['cpp', 'c', 'python']}
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
 Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
@@ -26,7 +29,7 @@ Plug 'tpope/vim-sensible'
 Plug 'rhysd/clever-f.vim'
 Plug 'honza/vim-snippets'
 Plug 'vim-scripts/stlrefvim'
-Plug 'Mizuchi/STL-Syntax'
+Plug 'Mizuchi/STL-Syntax', {'for': 'cpp'}
 
 " find & search & move
 Plug 'Yggdroot/LeaderF', {'on': ['LeaderfFile', 'LeaderfFunction']}
@@ -34,7 +37,8 @@ Plug 'easymotion/vim-easymotion', {'on': ['<Plug>(easymotion-bd-w)', '<Plug>(eas
 
 " syntax highlight
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'html'}
-Plug 'liuchengxu/space-vim-dark'
+" 暂时不用这个主题
+" Plug 'liuchengxu/space-vim-dark'
 Plug 'vim-python/python-syntax', {'for': 'python'}
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
 Plug 'posva/vim-vue', {'for': 'vue'}
@@ -54,6 +58,12 @@ Plug 'honza/vim-snippets'
 
 call plug#end()
 "插件末尾
+" 设置YCM延时加载
+augroup load_ycm
+  autocmd!
+  autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! load_cmd
+augroup END
+
 " python-syntax
 let g:python_highlight_all = 1
 
@@ -218,7 +228,7 @@ tnoremap <leader>w <C-\><C-n>
 tnoremap <leader>q <C-\><C-n>:q!<cr>
 
 if has("nvim")
-    nnoremap <leader>o :below 10sp term://$SHELL<cr>i
+  nnoremap <leader>o :below 10sp term://$SHELL<cr>i
 endif
 
 tnoremap <C-h> <C-\><C-n><C-w>h
@@ -232,11 +242,11 @@ tnoremap gp <C-\><C-n>:tabp<CR>
 " vim autocmd
 " 配置vim打开时vim自动定位到上次的位置
 if has("autocmd")
-    autocmd BufRead *.txt set tw=78
-    autocmd BufReadPost *
-                \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-                \   exe "normal g'\"" |
-                \ endif
+  autocmd BufRead *.txt set tw=78
+  autocmd BufReadPost *
+        \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+        \   exe "normal g'\"" |
+        \ endif
 endif
 
 autocmd FileType python set colorcolumn=80
@@ -275,7 +285,9 @@ noremap <leader>a :Autoformat<CR>
 
 
 " indentLine
-let g:indentLine_char='┆'
+" 设置竖线颜色
+let g:indentLine_color_gui = '#E64A19'
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_enabled = 1
 let g:indentLine_fileTypeExclude = ['json']
 " indentLine 不在json文件中加载, 目的是显示双引号
@@ -318,11 +330,11 @@ nmap <F8> :TagbarToggle<CR>
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = ' -std=c++14 -stdlib=libc++'
 let g:ale_linters = {
-            \ 'python': ['flake8', 'mypy'],
-            \ 'reStructuredText': ['rstcheck'],
-            \ 'go': ['go build', 'golint', 'gofmt', 'go vet', 'goimports'],
-            \ 'c' : ['gcc']
-            \ }
+      \ 'python': ['flake8', 'mypy'],
+      \ 'reStructuredText': ['rstcheck'],
+      \ 'go': ['go build', 'golint', 'gofmt', 'go vet', 'goimports'],
+      \ 'c' : ['gcc']
+      \ }
 
 " let g:syntastic_python_flask8_post_args="--max-line-length=120"
 let g:ale_python_mypy_options = '--ignore-missing-imports --follow-imports=skip --no-strict-optional'
@@ -381,17 +393,17 @@ let g:ycm_filetype_blacklist = {
       \ 'nerdtree' : 1,
       \}
 let g:ycm_semantic_triggers =  {
-  \   'c' : ['->', '.'],
-  \   'objc' : ['->', '.'],
-  \   'cpp,objcpp' : ['->', '.', '::'],
-  \   'perl' : ['->'],
-  \   'php' : ['->', '::'],
-  \   'cs,java,javascript,d,vim,ruby,python,perl6,scala,vb,elixir,go' : ['.'],
-  \   'lua' : ['.', ':'],
-  \   'erlang' : [':'],
-  \   'css' : ['re!^\s{4}', 're!:\s+'],
-  \   'html' : ['</'],
-  \ }
+      \   'c' : ['->', '.'],
+      \   'objc' : ['->', '.'],
+      \   'cpp,objcpp' : ['->', '.', '::'],
+      \   'perl' : ['->'],
+      \   'php' : ['->', '::'],
+      \   'cs,java,javascript,d,vim,ruby,python,perl6,scala,vb,elixir,go' : ['.'],
+      \   'lua' : ['.', ':'],
+      \   'erlang' : [':'],
+      \   'css' : ['re!^\s{4}', 're!:\s+'],
+      \   'html' : ['</'],
+      \ }
 
 
 
@@ -419,9 +431,9 @@ let g:Lf_ReverseOrder = 1
 let g:Lf_WindowHeight = 0.30
 let g:Lf_CursorBlink = 0
 let g:Lf_WildIgnore = {
-            \ 'dir': ['.svn','.git','.hg', 'anaconda3', 'Download', 'node_modules', '.*', 'venv', 'migrations', '__pycache__'],
-            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[cod]']
-            \}
+      \ 'dir': ['.svn','.git','.hg', 'anaconda3', 'Download', 'node_modules', '.*', 'venv', 'migrations', '__pycache__'],
+      \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[cod]']
+      \}
 
 set cursorcolumn
 set cursorline
@@ -431,8 +443,8 @@ hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkgreen guifg=w
 
 " 打开文件自动跳转到上一次的光标位置
 if has("autocmd")
-    au BufReadPost * if line("`\"") > 1 && line("`\"") <= line("$") | exe "normal! g`\"" | endif
-    " for simplicity, "  au BufReadPost * exe "normal! g`\"", is Okay.
+  au BufReadPost * if line("`\"") > 1 && line("`\"") <= line("$") | exe "normal! g`\"" | endif
+  " for simplicity, "  au BufReadPost * exe "normal! g`\"", is Okay.
 endif
 
 " 光标限制，尽量让你的工作区放置在屏幕当中
