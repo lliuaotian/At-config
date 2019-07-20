@@ -4,7 +4,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'Valloric/YouCompleteMe', {'on': [], 'do': './install.py --clang-complete --go-complete --system-libclang --java-complete'}
 
 " Plug '~/.vim/plugged/YouCompleteMe'
-Plug '/usr/share/vim/vimfiles/autoload/youcompleteme.vim', {'on': []}
+" Plug '/usr/share/vim/vimfiles/autoload/youcompleteme.vim', {'on': []}
 Plug 'rdnetto/YCM-Generator', {'branch':'stable'}
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'ryanoasis/vim-devicons',
@@ -53,29 +53,37 @@ Plug 'sophacles/vim-processing', {'for':['html', 'css', 'js']}
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
+" 管理tab
 Plug 'ervandew/supertab'
-Plug 'honza/vim-snippets'
+" 语法补全
+Plug 'honza/vim-snippets', {'on':[]}
 
 call plug#end()
 "插件末尾
+" 延时加载语法补全
+augroup load_snippets
+  autocmd!
+  autocmd InsertEnter * call plug#load('vim-snippets') | autocmd! load_snippets
+augroup END
+
 " 设置YCM延时加载
 augroup load_ycm
   autocmd!
-  autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! load_cmd
+  autocmd InsertEnter * call source '/usr/share/vim/vimfiles/autoload/youcompleteme.vim' | autocmd! load_ycm
 augroup END
 
 " python-syntax
 let g:python_highlight_all = 1
 
 " lazy load plugins
-autocmd! InsertEnter * call Init()
-let g:lazy_load = 0
-function! Init()
-  if g:lazy_load == 0
-    let g:lazy_load = 1
-    call plug#load('YouCompleteMe')
-  endif
-endfunction
+" autocmd! InsertEnter * call Init()
+" let g:lazy_load = 0
+" function! Init()
+"   if g:lazy_load == 0
+"     let g:lazy_load = 1
+"     call plug#load('YouCompleteMe')
+"   endif
+" endfunction
 
 
 " vim setting
@@ -274,15 +282,6 @@ let g:formatdef_harttle = '"astyle --style=attach --pad-oper"'
 let g:formatters_cpp = ['harttle']
 let g:formatter_yapf_style = 'google'
 noremap <leader>a :Autoformat<CR>
-
-
-" vim-markdown
-" let g:instant_markdown_autostart = 0 "关闭chrome自动打开
-" "使用 :InstantMarkdionPreview 打开chrome预览
-" let g:vim_markdown_folding_disabled = 1 "禁用折叠
-" let g:vim_markdown_conceal = 0 "禁用语法隐藏
-" let g:vim_markdown_no_default_key_mappings = 1
-
 
 " indentLine
 " 设置竖线颜色
