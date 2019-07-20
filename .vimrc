@@ -36,16 +36,15 @@ Plug 'easymotion/vim-easymotion', {'on': ['<Plug>(easymotion-bd-w)', '<Plug>(eas
 Plug 'Glench/Vim-Jinja2-Syntax', {'for': 'html'}
 Plug 'liuchengxu/space-vim-dark'
 Plug 'vim-python/python-syntax', {'for': 'python'}
-Plug 'ekalinin/Dockerfile.vim', {'for': 'dockerfile'}
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
 Plug 'posva/vim-vue', {'for': 'vue'}
 Plug 'luochen1990/rainbow'
-" html插件
-Plug 'mattn/emmet-vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'groenewege/vim-less'
-Plug 'Raimondi/delimitMate'
-Plug 'sophacles/vim-processing'
+" html插件 让他们只在写前端文件的时候起作用
+Plug 'mattn/emmet-vim', {'for':['html', 'css', 'js']}
+Plug 'hail2u/vim-css3-syntax', {'for':['html', 'css', 'js']}
+Plug 'groenewege/vim-less', {'for':['html', 'css', 'js']}
+Plug 'Raimondi/delimitMate', {'for':['html', 'css', 'js']}
+Plug 'sophacles/vim-processing', {'for':['html', 'css', 'js']}
 
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -112,7 +111,7 @@ set hidden
 set laststatus=2           " 设置状态航
 set hlsearch
 " ctags setting
-set tags=./tags;/
+set tags=./tags
 
 
 " vimsymotion-bd-jk) " 跳转到任意行首" colorscheme and color setting
@@ -322,6 +321,7 @@ let g:ale_linters = {
             \ 'python': ['flake8', 'mypy'],
             \ 'reStructuredText': ['rstcheck'],
             \ 'go': ['go build', 'golint', 'gofmt', 'go vet', 'goimports'],
+            \ 'c' : ['gcc']
             \ }
 
 " let g:syntastic_python_flask8_post_args="--max-line-length=120"
