@@ -69,7 +69,7 @@ function! ShowPos()
 	let max_line =  line("$")
 	let pos = now_line * 1.0 / max_line * 1.0 * 100
 	let pos = float2nr(pos) / 10
-	let statusline="%F\ \ \ Ascii:%b\ 0x:%B\ "
+	let statusline="%F\ \ \ Ascii:%-5b\ 0x:%-4B\ "
 	let statusline2="%=[FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%p%%]\ 行:%l\ 列:%v\ 最大行:%L\ %y"
 	let statusline3 = "["
 	let g:count = 0
