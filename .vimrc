@@ -88,3 +88,7 @@ function! ShowPos()
 endfunction
 autocmd CursorMoved * call ShowPos()
 autocmd CursorMovedI * call ShowPos()
+
+inoremap jj <Esc>j
+inoremap kk <Esc>k
+inoremap dd <Esc>ddi
