@@ -2,7 +2,7 @@
 已经更新.vimrc
 
 Linux平台安装使用Plug
-'''shell
+'''
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 '''
