@@ -85,10 +85,50 @@ function! ShowPos()
 	let statusline3 = statusline3 . "]"
 	let statusline = statusline . statusline3 . statusline2
 	let &statusline = statusline
-endfunction
+endfunction()
 autocmd CursorMoved * call ShowPos()
 autocmd CursorMovedI * call ShowPos()
 
 inoremap jj <Esc>j
 inoremap kk <Esc>k
 inoremap dd <Esc>ddi
+
+" 安装插件
+call plug#begin('~/.vim/plugged')
+
+" 文件树
+Plug 'scrooloose/nerdtree'
+" 代码格式化美化
+Plug 'Chiel92/vim-autoformat'
+" vim配色方案
+Plug 'flazz/vim-colorschemes'
+" 通用代码注释
+Plug 'tpope/vim-commentary'
+" usage
+" gcc 注释所在行
+" gc 注释选中部分 visual模式下
+" gcu 撤销上一次注释
+" gcgc 撤销注释当前行和临近的N行注释
+Plug 'junegunn/vim-easy-align'
+" usage
+" ea进入对齐模式
+" 默认是左对齐
+" 回车进入R模式是右对齐 right
+" 再次回车进入C模式是居中对齐 Centered
+" 紧接着输入对齐中间的字符，也就是分隔符
+" 补全插件
+Plug 'ycm-core/YouCompleteMe', { 'do' : './install.py --clang-completer'}
+
+call plug#end()
+
+" 设置vim-easy-align
+" 自动对齐
+nmap ea :EasyAlign<CR>
+
+
+" 设置vim-autoformat
+" 自动格式化内容
+noremap <Leader>ac :Autoformat<CR>
+" 设置vim-colorschemes
+" 配色方案设置
+colorscheme molokai
