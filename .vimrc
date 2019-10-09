@@ -97,7 +97,7 @@ inoremap dd <Esc>ddi
 call plug#begin('~/.vim/plugged')
 
 " 文件树
-Plug 'Shougo/defx.nvim'
+Plug 'scrooloose/nerdtree'
 " 代码格式化美化
 Plug 'Chiel92/vim-autoformat'
 " vim配色方案
