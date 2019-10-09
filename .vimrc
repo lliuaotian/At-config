@@ -11,9 +11,8 @@ nmap L $
 nmap J 3j
 nmap K 3k
 " 关于保存退出文件相关
-nmap <Leader>w :w
-
-nmap <Leader>q :q!
+nmap <Leader>w :w<CR>
+nmap <Leader>e :wq<CR>
 
 " 处理复制粘贴
 vnoremap <Leader>y "+y
@@ -24,7 +23,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " 让vim配置保存后立马生效
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
 " 开启实时搜索并且对大小写不敏感
 set incsearch
 set ignorecase
@@ -74,7 +73,7 @@ function! ShowPos()
 	let statusline3 = "["
 	let g:count = 0
 	while g:count < 10
-		if pos > 0
+		if pos > -1
 			let statusline3 = statusline3 . "➡"
 			let pos = pos - 1
 		else
@@ -93,11 +92,12 @@ inoremap jj <Esc>j
 inoremap kk <Esc>k
 inoremap dd <Esc>ddi
 
+
 " 安装插件
 call plug#begin('~/.vim/plugged')
 
 " 文件树
-Plug 'scrooloose/nerdtree'
+Plug 'Shougo/defx.nvim'
 " 代码格式化美化
 Plug 'Chiel92/vim-autoformat'
 " vim配色方案
@@ -117,14 +117,30 @@ Plug 'junegunn/vim-easy-align'
 " 再次回车进入C模式是居中对齐 Centered
 " 紧接着输入对齐中间的字符，也就是分隔符
 " 补全插件
-Plug 'ycm-core/YouCompleteMe', { 'do' : './install.py --clang-completer'}
+Plug 'ycm-core/YouCompleteMe'
+" bash插件 在vim中运行command
+Plug 'lrvick/Conque-Shell'
+" usage
+" ConqueTerm bash 运行bash
+" ConqueTermSplit <command> 分割窗口打开command
+" ConqueTermVSplit <command> 分割窗口打开command
+" ConqueTermTab <command> 分割窗口打开command
+Plug 'tpope/vim-pathogen'
+" 符号编辑插件
+Plug 'tpope/vim-surround'
+" git管理器
+Plug 'tpope/vim-fugitive'
+" c++ stl高亮
+Plug 'octol/vim-cpp-enhanced-highlight'
+" tab自动补全内容
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
 " 设置vim-easy-align
-" 自动对齐
-nmap ea :EasyAlign<CR>
-
+" 自动对齐 map visual映射
+xnoremap ea :EasyAlign<CR>
 
 " 设置vim-autoformat
 " 自动格式化内容
@@ -132,3 +148,25 @@ noremap <Leader>ac :Autoformat<CR>
 " 设置vim-colorschemes
 " 配色方案设置
 colorscheme molokai
+
+" 设置youcompleteme
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+" 设置octol/vim-cpp-enhanced-highlight
+" 默认不高亮类作用域
+let g:cpp_class_scope_highlight = 1
+" 成员变量也是默认不显示
+let g:cpp_member_variable_highlight = 1
+" 声明中高亮类名
+let g:cpp_class_decl_highlight = 1
+" 模版突出显示
+let g:cpp_experimental_template_highlight = 1
+" 库突出显示
+let g:cpp_concepts_highlight = 1
+
+" 设置ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+
+" 高亮显示当前行和列
+set cursorline
+set cursorcolumn
