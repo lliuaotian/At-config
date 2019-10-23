@@ -90,7 +90,6 @@ autocmd CursorMovedI * call ShowPos()
 
 inoremap jj <Esc>j
 inoremap kk <Esc>k
-inoremap dd <Esc>ddi
 
 
 " 安装插件
@@ -170,3 +169,5 @@ let g:UltiSnipsExpandTrigger="<tab>"
 " 高亮显示当前行和列
 set cursorline
 set cursorcolumn
+
+set backspace=2
