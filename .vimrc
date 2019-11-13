@@ -43,6 +43,8 @@ set fileformat=unix
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
+" 将tab自动转为空格
+set expandtab
 " 不能自动换行
 set nowrap
 " 格式化
