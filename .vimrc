@@ -23,7 +23,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " 让vim配置保存后立马生效
-" autocmd BufWritePost $MYVIMRC source $MYVIMRC
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
 " 开启实时搜索并且对大小写不敏感
 set incsearch
 set ignorecase
@@ -62,7 +62,7 @@ set matchtime=5    " 匹配括号高亮的时间
 set scrolloff=20  " 光标始终保持在距离上下顶点20行的位置
 " 自定义状态行
 set laststatus=2
-set statusline=%F\ \ \ Ascii:%b\ 0x:%B\ %=[FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%p%%]\ 行:%l\ 列:%v\ 最大行:%L\ %y
+set statusline=%F\ Ascii:%b\ 0x:%B\ %=[%{&ff}]\ 行:%l\ 列:%v\ 最大行:%L\ %y
 " 自定义函数
 function! ShowPos()
 	let &statusline = ""
@@ -70,8 +70,8 @@ function! ShowPos()
 	let max_line =  line("$")
 	let pos = now_line * 1.0 / max_line * 1.0 * 100
 	let pos = float2nr(pos) / 10
-	let statusline="%F\ \ \ Ascii:%-5b\ 0x:%-4B\ "
-	let statusline2="%=[FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%p%%]\ 行:%l\ 列:%v\ 最大行:%L\ %y"
+	let statusline="%F\ Ascii:%-5b\ 0x:%-4B\ "
+	let statusline2="%=[%{&ff}]\ 行:%l\ 列:%v\ 最大行:%L\ %y"
 	let statusline3 = "["
 	let g:count = 0
 	while g:count < 10
@@ -136,6 +136,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 " tab自动补全内容
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -153,6 +154,10 @@ colorscheme molokai
 " 设置youcompleteme
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_semantic_triggers = {
+    \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+    \ 'cs,lua,javascript': ['re!\w{2}'],
+    \ }
 " 设置octol/vim-cpp-enhanced-highlight
 " 默认不高亮类作用域
 let g:cpp_class_scope_highlight = 1
@@ -209,3 +214,9 @@ endif
 
 au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
 au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+
+" 打开文件自动跳转到上一次的光标位置
+if has("autocmd")
+  au BufReadPost * if line("`\"") > 1 && line("`\"") <= line("$") | exe "normal! g`\"" | endif
+  " for simplicity, "  au BufReadPost * exe "normal! g`\"", is Okay.
+endif
