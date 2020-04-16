@@ -5,8 +5,11 @@ filetype on
 " 根据不同的文件类型加载不同的插件
 filetype plugin on
 " 定义快捷键到行尾部和首部
-nmap H ^
-nmap L $
+" 启用这种方式
+" nmap H ^
+" nmap L $
+nnoremap <C-a> ^
+nnoremap <C-E> $
 " 快速跳转
 nmap J 3j
 nmap K 3k
@@ -118,7 +121,8 @@ Plug 'junegunn/vim-easy-align'
 " 再次回车进入C模式是居中对齐 Centered
 " 紧接着输入对齐中间的字符，也就是分隔符
 " 补全插件
-Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --all'}
+" Plug '~/.vim/plugged/YouCompleteMe'
 " bash插件 在vim中运行command
 Plug 'lrvick/Conque-Shell'
 " usage
@@ -232,3 +236,7 @@ if has("autocmd")
   au BufReadPost * if line("`\"") > 1 && line("`\"") <= line("$") | exe "normal! g`\"" | endif
   " for simplicity, "  au BufReadPost * exe "normal! g`\"", is Okay.
 endif
+
+" nerdtree设置
+map <leader>n :NERDTreeMirrorCR>
+map <leader>n :NERDTreeToggle<CR>
