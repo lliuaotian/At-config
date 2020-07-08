@@ -102,6 +102,8 @@ call plug#begin('~/.vim/plugged')
 
 " 文件树
 Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+" 文件数图标
 " 代码格式化美化
 Plug 'Chiel92/vim-autoformat'
 " vim配色方案
@@ -233,8 +235,7 @@ au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger 
 
 " 打开文件自动跳转到上一次的光标位置
 if has("autocmd")
-  au BufReadPost * if line("`\"") > 1 && line("`\"") <= line("$") | exe "normal! g`\"" | endif
-  " for simplicity, "  au BufReadPost * exe "normal! g`\"", is Okay.
+  au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif  
 endif
 
 " nerdtree设置
