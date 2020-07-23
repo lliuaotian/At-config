@@ -90,6 +90,13 @@ get_python_inc(),
 '-I',
 '/usr/include/c++/4.2.1/ext/',
 '--std=c++17',
+'/Library/Developer/CommandLineTools/usr/include/c++/v1',
+'/usr/local/include',
+'/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include',
+'/Library/Developer/CommandLineTools/usr/include',
+'/usr/include',
+'/System/Library/Frameworks',
+'/Library/Frameworks',
 ]
 
 
