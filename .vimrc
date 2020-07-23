@@ -159,6 +159,7 @@ colorscheme molokai
 
 " 设置youcompleteme
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_semantic_triggers = {
     \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
@@ -175,6 +176,9 @@ let g:ycm_filetype_whitelist = {
       \ "sh":1,
       \ "zsh":1,
       \ "zimbu":1,
+      \ "python":1,
+      \ "vim":1,
+      \ "text":1,
       \ }
 " 设置octol/vim-cpp-enhanced-highlight
 " 默认不高亮类作用域
@@ -241,3 +245,4 @@ endif
 " nerdtree设置
 map <leader>n :NERDTreeMirrorCR>
 map <leader>n :NERDTreeToggle<CR>
+
