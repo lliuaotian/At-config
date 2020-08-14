@@ -68,27 +68,27 @@ set laststatus=2
 set statusline=%F\ Ascii:%b\ 0x:%B\ %=[%{&ff}]\ 行:%l\ 列:%v\ 最大行:%L\ %y
 " 自定义函数
 function! ShowPos()
-	let &statusline = ""
-	let now_line = line(".")
-	let max_line =  line("$")
-	let pos = now_line * 1.0 / max_line * 1.0 * 100
-	let pos = float2nr(pos) / 10
-	let statusline="%F\ Ascii:%-5b\ 0x:%-4B\ "
-	let statusline2="%=[%{&ff}]\ 行:%l\ 列:%v\ 最大行:%L\ %y"
-	let statusline3 = "["
-	let g:count = 0
-	while g:count < 10
-		if pos > -1
-			let statusline3 = statusline3 . "➡"
-			let pos = pos - 1
-		else
-			let statusline3 = statusline3 . "\ "
-		endif
-		let g:count = g:count + 1
-	endwhile
-	let statusline3 = statusline3 . "]"
-	let statusline = statusline . statusline3 . statusline2
-	let &statusline = statusline
+  let &statusline = ""
+  let now_line = line(".")
+  let max_line =  line("$")
+  let pos = now_line * 1.0 / max_line * 1.0 * 100
+  let pos = float2nr(pos) / 10
+  let statusline="%F\ Ascii:%-5b\ 0x:%-4B\ "
+  let statusline2="%=[%{&ff}]\ 行:%l\ 列:%v\ 最大行:%L\ %y"
+  let statusline3 = "["
+  let g:count = 0
+  while g:count < 10
+    if pos > -1
+      let statusline3 = statusline3 . "➡"
+      let pos = pos - 1
+    else
+      let statusline3 = statusline3 . "\ "
+    endif
+    let g:count = g:count + 1
+  endwhile
+  let statusline3 = statusline3 . "]"
+  let statusline = statusline . statusline3 . statusline2
+  let &statusline = statusline
 endfunction()
 autocmd CursorMoved * call ShowPos()
 autocmd CursorMovedI * call ShowPos()
@@ -126,12 +126,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --all'}
 " Plug '~/.vim/plugged/YouCompleteMe'
 " bash插件 在vim中运行command
-Plug 'lrvick/Conque-Shell'
-" usage
-" ConqueTerm bash 运行bash
-" ConqueTermSplit <command> 分割窗口打开command
-" ConqueTermVSplit <command> 分割窗口打开command
-" ConqueTermTab <command> 分割窗口打开command
 Plug 'tpope/vim-pathogen'
 " 符号编辑插件
 Plug 'tpope/vim-surround'
@@ -143,8 +137,12 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'honza/vim-snippets'
+" 对称括号加颜色
+" Plug 'frazrepo/vim-rainbow'
 
 call plug#end()
+" 对称括号加颜色 设置
+let g:rainbow_active = 1
 
 " 设置vim-easy-align
 " 自动对齐 map visual映射
@@ -162,16 +160,17 @@ let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 " let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_semantic_triggers = {
-    \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-    \ 'cs,lua,javascript': ['re!\w{2}'],
-    \ }
+      \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+      \ 'cs,lua,javascript': ['re!\w{2}'],
+      \ }
 " 不在单独打开窗口显示函数原型
 set completeopt=menu,menuone
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_show_diagnostics_ui = 0
+" ycm显示补全的白名单 1==True
 let g:ycm_filetype_whitelist = {
       \ "c":1,
-      \ "cpp":1, 
+      \ "cpp":1,
       \ "objc":1,
       \ "sh":1,
       \ "zsh":1,
@@ -239,10 +238,15 @@ au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger 
 
 " 打开文件自动跳转到上一次的光标位置
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif  
+  au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 endif
 
 " nerdtree设置
 map <leader>n :NERDTreeMirrorCR>
 map <leader>n :NERDTreeToggle<CR>
 
+" taglist
+" 设置Tlist的宽度
+let Tlist_WinWidth=30
+" 如果Tlist是最后一个窗口就直接关闭
+let Tlist_Exit_OnlyWindow=1
