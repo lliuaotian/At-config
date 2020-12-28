@@ -100,6 +100,22 @@ inoremap kk <Esc>k
 " 安装插件
 call plug#begin('~/.vim/plugged')
 
+" vim欢迎界面
+Plug 'mhinz/vim-startify'
+
+" 模糊搜索
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
+" coc.nvim
+" Plug 'neoclide/coc.nvim', {'branch' : 'release'}
+
+" 中文帮助文档
+Plug 'yianwillis/vimcdoc'
+
+" 代码检查
+Plug 'vim-syntastic/syntastic'
+
 " 文件树
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
@@ -153,11 +169,10 @@ xnoremap ea :EasyAlign<CR>
 noremap <Leader>ac :Autoformat<CR>
 " 设置vim-colorschemes
 " 配色方案设置
-colorscheme molokai
+colorscheme gruvbox
 
 " 设置youcompleteme
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-" let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_semantic_triggers = {
       \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
@@ -167,6 +182,7 @@ let g:ycm_semantic_triggers = {
 set completeopt=menu,menuone
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_key_invoke_complerion = '<c-space>'
 " ycm显示补全的白名单 1==True
 let g:ycm_filetype_whitelist = {
       \ "c":1,
@@ -176,9 +192,13 @@ let g:ycm_filetype_whitelist = {
       \ "zsh":1,
       \ "zimbu":1,
       \ "python":1,
-      \ "vim":1,
       \ "text":1,
+      \ "cmake":1,
+      \ "javascript":1,
+      \ "vim":1,
+      \ "html":1,
       \ }
+
 " 设置octol/vim-cpp-enhanced-highlight
 " 默认不高亮类作用域
 let g:cpp_class_scope_highlight = 1
@@ -195,8 +215,8 @@ let g:cpp_concepts_highlight = 1
 let g:UltiSnipsExpandTrigger="<tab>"
 
 " 高亮显示当前行和列
-set cursorline
-set cursorcolumn
+" set cursorline
+" set cursorcolumn
 
 set backspace=2
 
@@ -242,7 +262,7 @@ if has("autocmd")
 endif
 
 " nerdtree设置
-map <leader>n :NERDTreeMirrorCR>
+map <leader>n :NERDTreeMirror<CR>
 map <leader>n :NERDTreeToggle<CR>
 
 " taglist
@@ -250,3 +270,52 @@ map <leader>n :NERDTreeToggle<CR>
 let Tlist_WinWidth=30
 " 如果Tlist是最后一个窗口就直接关闭
 let Tlist_Exit_OnlyWindow=1
+
+" syntastic
+map <leader>s :Errors<CR>
+let g:syntastic_error_symbol='E'
+let g:syntastic_warning_symbol='W'
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
+
+" startify
+" 设置欢迎词
+let g:startify_custom_header = [
+      \'+--------------------------------------------------+',
+      \'|     使用vim吗？刘傲天。                          |',
+      \'|                                                  |',
+      \'|                           https://www.allsrc.cn  |',
+      \'+--------------------------------------------------+',
+      \]
+" 设置END
+" END
+
+" 设置缓冲区
+set hidden
+
+" 如果超过这个时间没有输入，将内容写入到磁盘
+set updatetime=3
+" c	不给出 |ins-completion-menu| 信息。例如，
+set shortmess+=c
+
+" " COC设置 不太吸引我，不想用 在考虑
+" let g:coc_global_extensions = [
+"   \ 'coc-json',
+"   \ 'coc-vimlsp']
+" 
+" " Ctrl + space 补全
+" inoremap <silent><expr> <c-space> coc#refresh()
+" " 回车补全所选中的代码
+" if exists('*complete_info')
+" " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" else
+  " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" endif
+" " 跳转代码
+" " GoTo code navigation.
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+" " 重命名变量
+" nmap <leader>rn <Plug>(coc-rename)
