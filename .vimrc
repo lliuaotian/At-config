@@ -15,6 +15,8 @@ nmap J 3j
 nmap K 3k
 " 关于保存退出文件相关
 nmap <Leader>w :w<CR>
+" 不保存直接退出
+nmap <Leader>q :q!<CR>
 nmap <Leader>e :wq<CR>
 
 " 处理复制粘贴
@@ -57,7 +59,7 @@ set smartindent    " 为C语言提供自动缩紧
 set cindent        " 使用C样式缩紧
 set smarttab       " 在行和段开始处使用制表符
 " 设置文件编码
-set fileencoding=utf-8
+set fileencoding=UTF-8
 " 搜索设置
 set showmatch      " 匹配成队符号
 set matchtime=5    " 匹配括号高亮的时间
@@ -120,6 +122,8 @@ Plug 'vim-syntastic/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 " 文件数图标
+" 图标美化
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " 代码格式化美化
 Plug 'Chiel92/vim-autoformat'
 " vim配色方案
